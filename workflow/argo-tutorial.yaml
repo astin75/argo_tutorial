@@ -1,0 +1,12 @@
+#kubectl create -f argo-tutorial.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow                  # new type of k8s spec
+metadata:
+  generateName: argo-tutorial-    # name of the workflow spec
+spec:
+  entrypoint: time-1          # invoke the whalesay template
+  templates:
+    - name: time-1              # name of the template
+      container:
+        image: astin75/argo_tutorial:0.0.1
+        command: [ python, time_count.py, --sec, "5" ]
